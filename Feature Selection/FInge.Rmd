@@ -1,0 +1,233 @@
+---
+title: "Fengin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+normalize <- function(x) {
+    return ((x - min(x)) / (max(x) - min(x)))
+}
+
+```
+
+
+```{r}
+
+#import 
+
+library(readr)
+data <- read_csv("data/indicCentEG5.csv")
+
+data <- data[!is.na(data$score),]
+
+summary(data)
+
+
+```
+
+
+```{r}
+#change missing values to na
+data[data<=-99999999]=NA
+
+```
+
+
+```{r}
+#remove Na
+
+dati= data[complete.cases(data),]
+
+#summary(dat)
+
+
+```
+
+```{r}
+sc = factor(dat$score)
+summary(sc)
+```
+
+
+```{r}
+
+#extract only the number from the class
+
+
+x=dati
+
+y = factor(dati$score)
+y<- substr(y, 0, 1)
+y= as.numeric(y)
+
+x$score =y
+
+
+#remove constant and names
+water = match("water",names(x))
+dat = x[,-c(1,2,3,water)]
+
+```
+
+
+```{r}
+library(corrplot)
+library(psych)
+
+d=dat
+
+rail = match("rail",names(dat))
+ratmeet= match("ratiomeeting",names(dat))
+ratind = match("ratioindustrie",names(dat))
+dom45_60 = match("dom45_60",names(dat))
+dom60_70 = match("dom60_70",names(dat))
+dom80_85 = match("dom80_85",names(dat))
+houses2005 = match("houses2000_2005",names(dat))
+ind = match("industrie",names(dat))
+op = match("OPP_WATER",names(dat))
+
+
+#d=d[,c()]
+
+#d= d[,-c(rail,ratmeet,ratind,dom45_60,dom60_70,dom80_85,houses2005,ind,op)]
+
+#check correlations
+
+m = cor(d)
+
+corrplot(m,type = "upper")
+
+#check KMO
+KMO(m)
+```
+
+
+
+```{r}
+library(clusterSim)
+
+sc= match("score",names(d))
+dot = d[,-sc]
+
+
+#standardisation
+#scaled.d = as.data.frame(lapply(dot, normalize))
+
+scaled.d= dot
+```
+
+
+```{r}
+
+houses2005 = match("houses2000_2005",names(dat))
+
+rail = match("rail",names(dat))
+parcs = match("parcs",names(dat))
+fore = match("forest",names(dat))
+recreational = match("recreational",names(dat))
+op = match("OPP_WATER",names(dat))
+road = match("road",names(dat))
+ind = match("industrie",names(dat))
+mot = match("motor",names(dat))
+monu = match("monu_dens",names(dat))
+res = match("residentials",names(dat))
+agr =match("agric",names(dat))
+hous00 = match("houses00",names(dat))
+dom45_60 = match("dom45_60",names(dat))
+dom60_70 = match("dom60_70",names(dat))
+dom80_85 = match("dom80_85",names(dat))
+dom1900= match("dom1900",names(dat))
+ratmeet= match("ratiomeeting",names(dat))
+ratind = match("ratioindustrie",names(dat))
+houses2000 = match("houses2000",names(dat))
+houses9100= match("houses91_00",names(dat))
+h71_81= match("houses71_81",names(dat))
+h60_70= match("houses60_70",names(dat))
+h45_60= match("houses45_60",names(dat))
+rfree= match("ratiofree",names(dat))
+rrow= match("ratiorow",names(dat))
+h20_45= match("houses20_45",names(dat))
+h00_20= match("houses1900_1920",names(dat))
+
+
+aru = match("P_ANT_ARU",names(dat))
+suri = match("P_SURINAM",names(dat))
+kdv = match("AV1_KDV",names(dat))
+hh = match("AANTAL_HH", names(dat))
+dag = match("AF_DAGLMD", names(dat))
+bib = match("AF_BIBLIO", names(dat))
+zwemb = match("AF_ZWEMB", names(dat))
+west = match("P_WEST_AL", names(dat))
+treins=  match("AF_TREINST", names(dat))
+ziek = match("AF_ZIEK_I",names(dat))
+soc= match("P_SOCMINH",names(dat))
+turk = match("P_TURKIJE", names(dat))
+
+rest = match("AV1_RESTAU",names(dat))
+cafe= match("AV1_CAFE",names(dat))
+
+
+#keep only cafe and restaurants
+prop = scaled.d[,c(rest,cafe)]
+```
+
+```{r}
+library(factoextra)
+
+#Perfrom PCA on restaurant and cafe then integrates the newly formed variable instead of the old ones
+#save the file
+
+
+pca <- prcomp(prop, scale = FALSE)
+
+#fviz_eig(pca)
+
+#pca$rotation
+
+std_dev <- pca$sdev
+pr_var <- std_dev^2
+
+prop_varex <- pr_var/sum(pr_var)
+
+ 
+#cumsum(prop_varex)[1]
+ 
+#add a training set with principal components
+dt <- data.frame(score = d$score, pca$x)
+
+#we are interested in first 1 PCAs
+dt<- dt[,1:2]
+
+
+dit=scaled.d[,-c(rest,cafe)]
+
+dit$horeca = dt$PC1
+
+dit$score = d$score
+
+#dit.scaled = as.data.frame(lapply(dit, normalize))
+
+dit.scaled= dit
+
+dit.scaled$score = d$score
+
+summary(dit.scaled)
+
+dit.scaled$BU_NAAM = dati$BU_NAAM
+
+dit.scaled$GM_NAAM = dati$GM_NAAM
+
+
+
+write.csv(dit.scaled, file = "SMOTE3NAMES.csv")
+
+
+```
+
+
+
