@@ -1,7 +1,7 @@
 The differents folders contain :
 
-	Data Generation : - the file "gisviz.py" is the file that computes the indicators (running takes long) 
-			  - the file "prepareData" computes one time processes that have to be done before computing the indicators(running might takes long)
+	Data Generation : - the file "gisviz.py" is the file that computes the indicators (takes long time to run) 
+			  - the file "prepareData" computes one time processes that have to be done before computing the indicators(might take long time to run)
 			  - shapefiles needed for the computations
 
 
