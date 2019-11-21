@@ -91,16 +91,21 @@ Run in shell
 cd Simulation
 python gui.py
 ```
+Once the kivy window appeared, click on the Start button to enter the interface.The map of Maastricht will show and you can hover over the neighbourhoods and get their name. By cliking on the neighbourhoods you select it and the header will show the current score improvement, the number of turns used so far, a reset button and a button "Help me!" that would trigger the optimization algorithms. 
+On the left the possible actions appears and on the right the current indicators scores for the selected neighbourhood.
 
 ## Liveability Index 
  The description of the indicators and how they are computed from the Rigo Leefbaarometer 2.0 (IN DUTCH).
  https://doc.leefbaarometer.nl/resources/Leefbaarometer%202.0%20Instrumentontwikkeling%20CONCEPT.pdf
 
 
-## To Do 
-* Add shapefiles of other neighbourhoods
-* Add selection menu
-* Improve the indicators value to be more user friendly
+## Future Work
+* Connect the optimization algorithm to the interface.
+* Add shapefiles of other neighbourhoods.
+* Add selection menu.
+* Improve the indicators value to be more user friendly.
+* Show how much an action affect indicators and the score before using a turn. 
+
 
 
 
