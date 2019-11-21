@@ -2,7 +2,7 @@
 
 This repository holds the code from the paper "MaaSim: A Liveability Simulation for Improving the Quality of Life in Cities" published at SoGood2018 (http://tiny.cc/j8emgz).
 
-MaaSim is an open-source simulation based on the Dutch liveability score with a built-in AI module. Features are selected using feature engineering and Random Forests. Then, a modified scoring function is built based on the former liveability classes. The score is predicted using Random Forest for regression and achieved a recall of 0.83 with 10-fold cross-validation. Afterwards, Exploratory Factor Analysis is applied to select the actions present in the model. The resulting indicators are divided into 5 groups, and 12 actions are generated. The performance of four optimisation algorithms is compared, namely NSGA-II, PAES, SPEA2 and eps-MOEA, on three established criteria of quality: cardinality, the spread of the solutions, spacing, and the resulting score and number of turns. Although all four algorithms show different strengths, eps-MOEA is selected to be the most suitable for this problem. Ultimately, the simulation incorporates the model and the selected AI module in a GUI written in the Kivy framework for Python. Tests performed on users show positive responses and encourage further initiatives towards joining technology and public applications.
+MaaSim is an open-source simulation based on the Dutch liveability score(Rigo's Leefbaarometer 2.0)  with a built-in AI module. Features are selected using feature engineering and Random Forests. Then, a modified scoring function is built based on the former liveability classes. The score is predicted using Random Forest for regression and achieved a recall of 0.83 with 10-fold cross-validation. Afterwards, Exploratory Factor Analysis is applied to select the actions present in the model. The resulting indicators are divided into 5 groups, and 12 actions are generated. The performance of four optimisation algorithms is compared, namely NSGA-II, PAES, SPEA2 and eps-MOEA, on three established criteria of quality: cardinality, the spread of the solutions, spacing, and the resulting score and number of turns. Although all four algorithms show different strengths, eps-MOEA is selected to be the most suitable for this problem. Ultimately, the simulation incorporates the model and the selected AI module in a GUI written in the Kivy framework for Python. Tests performed on users show positive responses and encourage further initiatives towards joining technology and public applications.
 
 
 ![](june.gif)
@@ -64,7 +64,7 @@ More info here https://platypus.readthedocs.io/en/latest/index.html
 The differents folders contain :
 
 	Data Generation : - The file "prepareData" computes one time processes that have to be done before computing the indicators(might take long time to run)
-			  - The file "gisviz.py" is the file that computes the indicators value from the shapefiles following the Rigo Liveabilty Index() . It takes long time to run. 
+			  - The file "gisviz.py" is the file that computes the indicators value from the shapefiles following the Rigo Liveabilty Index(LEEFBAAROMETER 2.0) . It takes long time to run. 
 			  - Shapefiles with data needed for the computations
 
 
@@ -92,6 +92,10 @@ Run in shell
 cd Simulation
 python gui.py
 ```
+
+## Liveability Index 
+ The description of the indicators and how they are computed from the Rigo Leefbaarometer 2.0 (IN DUTCH).
+ https://doc.leefbaarometer.nl/resources/Leefbaarometer%202.0%20Instrumentontwikkeling%20CONCEPT.pdf
 
 
 ## To Do 
