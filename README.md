@@ -4,8 +4,7 @@ This repository holds the code from the paper "MaaSim: A Liveability Simulation 
 
 MaaSim is an open-source simulation based on the Dutch liveability score(Rigo's Leefbaarometer 2.0)  with a built-in AI module. Features are selected using feature engineering and Random Forests. Then, a modified scoring function is built based on the former liveability classes. The score is predicted using Random Forest for regression and achieved a recall of 0.83 with 10-fold cross-validation. Afterwards, Exploratory Factor Analysis is applied to select the actions present in the model. The resulting indicators are divided into 5 groups, and 12 actions are generated. The performance of four optimisation algorithms is compared, namely NSGA-II, PAES, SPEA2 and eps-MOEA, on three established criteria of quality: cardinality, the spread of the solutions, spacing, and the resulting score and number of turns. Although all four algorithms show different strengths, eps-MOEA is selected to be the most suitable for this problem. Ultimately, the simulation incorporates the model and the selected AI module in a GUI written in the Kivy framework for Python. Tests performed on users show positive responses and encourage further initiatives towards joining technology and public applications.
 
-
-![](june.gif)
+![](June.gif)
 
 
 
